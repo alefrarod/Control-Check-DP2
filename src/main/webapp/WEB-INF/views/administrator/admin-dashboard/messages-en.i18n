@@ -32,3 +32,6 @@ administrator.dashboard.form.label.avg-budget-of= Average prize in
 administrator.dashboard.form.label.deviation-budget-of= Deviation prize in
 administrator.dashboard.form.label.max-prize-in= Max prize in
 administrator.dashboard.form.label.min-prize-in= Min prize in
+
+administrator.dashboard.form.title.brid = Brids
+administrator.dashboard.form.label.ratio-of-artifacts = Ratio of artifacts with brids

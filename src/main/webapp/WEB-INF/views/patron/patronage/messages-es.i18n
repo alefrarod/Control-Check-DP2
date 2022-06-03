@@ -29,6 +29,7 @@ patron.patronage.list.label.code = Codigo
 patron.patronage.list.label.budget = Presupuesto
 
 patron.budget.non-negative = El presupuesto debe ser positivo
+
 patron.finishDate.order-error = La fecha final debe ser posterior a la fecha de inicio
 
 patron.finishDate.duration-error = La diferencia entre la fecha de inicio y final debe ser superior a un mes

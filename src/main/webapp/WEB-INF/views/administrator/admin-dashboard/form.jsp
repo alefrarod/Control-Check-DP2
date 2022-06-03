@@ -203,3 +203,64 @@
 	</jstl:forEach>
 	
 </table>
+
+<h2>
+	<acme:message code="administrator.dashboard.form.title.brid" />
+</h2>
+
+<table class="table table-sm">
+	<tr>
+		<th scope="row"><acme:message
+				code="administrator.dashboard.form.label.ratio-of-artifacts" />
+		</th>
+		<td><acme:print value="${adminDashboard.ratioOfArtifactsWithBrid}" />
+		</td>
+	</tr>
+</table>
+
+<h3>
+	<acme:message code="administrator.dashboard.form.title.currencies" />
+</h3>
+
+<table class="table table-sm">
+	<jstl:forEach var="entry" items="${adminDashboard.averageBridBudget.entrySet()}">
+		<tr>
+			<th scope="row"><acme:message
+					code="administrator.dashboard.form.label.avg-budget-of" /> <acme:print
+					value="${entry.key}" />
+			</th>
+			<td><acme:print value="${entry.value}" /> <acme:print
+					value="${entry.key}" /></td>
+		</tr>
+	</jstl:forEach>
+	<jstl:forEach var="entry" items="${adminDashboard.deviationBridBudget.entrySet()}">
+		<tr>
+			<th scope="row"><acme:message
+					code="administrator.dashboard.form.label.deviation-budget-of" /> <acme:print
+					value="${entry.key}" />
+			</th>
+			<td><acme:print value="${entry.value}" /> <acme:print
+					value="${entry.key}" /></td>
+		</tr>
+	</jstl:forEach>
+	<jstl:forEach var="entry" items="${adminDashboard.maxBridBudget.entrySet()}">
+		<tr>
+			<th scope="row"><acme:message
+					code="administrator.dashboard.form.label.max-prize-in" /> <acme:print
+					value="${entry.key}" />
+			</th>
+			<td><acme:print value="${entry.value}" /> <acme:print
+					value="${entry.key}" /></td>
+		</tr>
+	</jstl:forEach>
+	<jstl:forEach var="entry" items="${adminDashboard.minBridBudget.entrySet()}">
+		<tr>
+			<th scope="row"><acme:message
+					code="administrator.dashboard.form.label.min-prize-in" /> <acme:print
+					value="${entry.key}" />
+			</th>
+			<td><acme:print value="${entry.value}" /> <acme:print
+					value="${entry.key}" /></td>
+		</tr>
+	</jstl:forEach>
+</table>

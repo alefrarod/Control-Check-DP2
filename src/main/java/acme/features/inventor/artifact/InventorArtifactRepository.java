@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import acme.artifact.Artifact;
 import acme.artifact.ArtifactType;
 import acme.artifact.PartOf;
+import acme.entities.brid.Brid;
 import acme.framework.repositories.AbstractRepository;
 import acme.roles.Inventor;
 import acme.systemSetting.SystemSetting;
@@ -32,4 +33,7 @@ public interface InventorArtifactRepository extends AbstractRepository {
 	
 	@Query("select a from Artifact a where a.code=:code")
 	Artifact findByCode(String code);
+	
+	@Query("select c from Brid c")
+	Collection<Brid> findAllBrid();
 }

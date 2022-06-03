@@ -9,11 +9,8 @@ import acme.artifact.Artifact;
 import acme.artifact.ArtifactType;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Request;
-import acme.framework.datatypes.Money;
 import acme.framework.services.AbstractListService;
 import acme.roles.Inventor;
-import acme.systemSetting.SystemSetting;
-import acme.utils.moneyExchange.MoneyExchangeUtils;
 
 @Service
 public class InventorToolListService implements AbstractListService<Inventor, Artifact> {
@@ -63,9 +60,7 @@ public class InventorToolListService implements AbstractListService<Inventor, Ar
 		assert model != null;
 
 		request.unbind(entity, model, "name", "code", "description", "retailPrice");
-		final SystemSetting systemSetting = this.repository.findSystemSetting();
-		final Money convertedPrice = MoneyExchangeUtils.computeMoneyExchange(entity.getRetailPrice(), systemSetting.getDefaultCurrency());
-		model.setAttribute("convertedPrice", convertedPrice);
+		
 		
 	}
 

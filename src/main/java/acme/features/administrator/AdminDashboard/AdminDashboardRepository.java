@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import acme.artifact.Artifact;
 import acme.artifact.ArtifactType;
 import acme.datatypes.StatusType;
+import acme.entities.brid.Brid;
 import acme.entities.patronage.Patronage;
 import acme.framework.repositories.AbstractRepository;
 
@@ -22,4 +23,7 @@ public interface AdminDashboardRepository extends AbstractRepository {
 
 	@Query("select p from Patronage p where  p.status=:status")
 	Collection<Patronage> findPatronage(StatusType status);
+	
+	@Query("select c from Brid c")
+	Collection<Brid> findAllBrid();
 }

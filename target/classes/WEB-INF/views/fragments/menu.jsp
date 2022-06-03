@@ -69,6 +69,7 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.inventor.patronage" action="/inventor/patronage/list"/>
 			<acme:menu-suboption code="master.menu.inventor.tool-kit" action="/inventor/tool-kit/list"/>
+			<acme:menu-suboption code="master.menu.inventor.brid" action="/inventor/brid/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.patron" access="hasRole('Patron')">
