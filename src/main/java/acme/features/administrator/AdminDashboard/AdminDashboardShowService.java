@@ -15,7 +15,7 @@ import acme.Dashboard.AdminDashboard;
 import acme.artifact.Artifact;
 import acme.artifact.ArtifactType;
 import acme.datatypes.StatusType;
-import acme.entities.chimpum.Chimpum;
+import acme.entities.brid.Brid;
 import acme.entities.patronage.Patronage;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Request;
@@ -306,15 +306,15 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 		
 	//	Examen ------------------------------------------------------------------------------------------
 		
-		final int nChimpum = this.repository.findAllChimpums().size();
+		final int nBrids = this.repository.findAllBrid().size();
 		final Double nArtifacts = Double.valueOf(this.repository.findArtifact(ArtifactType.TOOL).size());	//cambiar en funcion de si es Tool o component
 		
-		result.setRatioOfArtifactsWithChimpum(nArtifacts>0? nChimpum/nArtifacts:0.);
+		result.setRatioOfArtifactsWithBrid(nArtifacts>0? nBrids/nArtifacts:0.);
 		
-		final Map<String, Double> mAverageChimpumBudget= new HashMap<String, Double>();
-		final Map<String, Double> mDeviationChimpumBudget= new HashMap<String, Double>();
-		final Map<String, Double> mMinChimpumBudget= new HashMap<String, Double>();
-		final Map<String, Double> mMaxChimpumBudget= new HashMap<String, Double>();
+		final Map<String, Double> mAverageBridHelping= new HashMap<String, Double>();
+		final Map<String, Double> mDeviationBridHelping= new HashMap<String, Double>();
+		final Map<String, Double> mMinBridHelping= new HashMap<String, Double>();
+		final Map<String, Double> mMaxBridHelping= new HashMap<String, Double>();
 
 		
 		nEur= 0;
@@ -329,7 +329,7 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 		desviationUsd= 0.;
 		desviationGbp= 0.;
 			
-		final Collection<Chimpum> chimpumList = this.repository.findAllChimpums();
+		final Collection<Brid> bridList = this.repository.findAllBrid();
 		
 		maxEur=0.;
 		maxUsd=0.;
@@ -338,11 +338,11 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 		minUsd=Double.MAX_VALUE;
 		minGbp=Double.MAX_VALUE;
 		
-		for(final Chimpum c: chimpumList) {
-			final Double prize = c.getBudget().getAmount(); 
-			switch (c.getBudget().getCurrency()) {
+		for(final Brid c: bridList) {
+			final Double prize = c.getHelping().getAmount(); 
+			switch (c.getHelping().getCurrency()) {
 			case "EUR":
-				totalEur+=c.getBudget().getAmount();
+				totalEur+=c.getHelping().getAmount();
 				nEur++;
 				
 				maxEur= prize>maxEur?prize:maxEur;
@@ -350,7 +350,7 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 				
 				break;
 			case "USD":
-				totalUsd+=c.getBudget().getAmount();
+				totalUsd+=c.getHelping().getAmount();
 				nUsd++;
 
 				maxUsd= prize>maxUsd?prize:maxUsd;
@@ -358,7 +358,7 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 				
 				break;
 			case "GBP":
-				totalGbp+=c.getBudget().getAmount();
+				totalGbp+=c.getHelping().getAmount();
 				nGbp++;
 
 				maxGbp= prize>maxGbp?prize:maxGbp;
@@ -368,40 +368,40 @@ public class AdminDashboardShowService implements AbstractShowService<Administra
 			}
 			
 		}
-		for(final Chimpum c: chimpumList) {
-			switch (c.getBudget().getCurrency()) {
+		for(final Brid c: bridList) {
+			switch (c.getHelping().getCurrency()) {
 			case "EUR":
-				desviationEur+=(c.getBudget().getAmount() - totalEur!=0?totalEur/nEur:0.)
-					  *(c.getBudget().getAmount() - totalEur!=0?totalEur/nEur:0.);
+				desviationEur+=(c.getHelping().getAmount() - totalEur!=0?totalEur/nEur:0.)
+					  *(c.getHelping().getAmount() - totalEur!=0?totalEur/nEur:0.);
 				break;
 			case "USD":
-				desviationUsd+=(c.getBudget().getAmount() - totalUsd!=0?totalUsd/nUsd:0.)
-					  *(c.getBudget().getAmount() - totalUsd!=0?totalUsd/nUsd:0.);
+				desviationUsd+=(c.getHelping().getAmount() - totalUsd!=0?totalUsd/nUsd:0.)
+					  *(c.getHelping().getAmount() - totalUsd!=0?totalUsd/nUsd:0.);
 				break;
 			case "GBP":
-				desviationGbp+=(c.getBudget().getAmount() - totalGbp!=0?totalGbp/nGbp:0.)
-					  *(c.getBudget().getAmount() - totalGbp!=0?totalGbp/nGbp:0.);
+				desviationGbp+=(c.getHelping().getAmount() - totalGbp!=0?totalGbp/nGbp:0.)
+					  *(c.getHelping().getAmount() - totalGbp!=0?totalGbp/nGbp:0.);
 				break;
 			}
 		}
 		
 		
-		mAverageChimpumBudget.put("EUR", totalEur!=0?totalEur/nEur:0.);
-		mAverageChimpumBudget.put("USD", totalUsd!=0?totalUsd/nUsd:0.);
-		mAverageChimpumBudget.put("GBP", totalGbp!=0?totalGbp/nGbp:0.);
-		mMaxChimpumBudget.put("EUR", maxEur);
-		mMaxChimpumBudget.put("USD", maxUsd);
-		mMaxChimpumBudget.put("GBP", maxGbp);
-		mMinChimpumBudget.put("EUR", minEur==Double.MAX_VALUE?0.:minEur);
-		mMinChimpumBudget.put("USD", minUsd==Double.MAX_VALUE?0.:minUsd);
-		mMinChimpumBudget.put("GBP", minGbp==Double.MAX_VALUE?0.:minGbp);
-		mDeviationChimpumBudget.put("EUR", nEur!=0?Math.sqrt(desviationEur/nEur):0);
-		mDeviationChimpumBudget.put("USD", nUsd!=0?Math.sqrt(desviationUsd/nUsd):0);
-		mDeviationChimpumBudget.put("GBP", nGbp!=0?Math.sqrt(desviationGbp/nGbp):0);
-		result.setAverageChimpumBudget(mAverageChimpumBudget);
-		result.setMaxChimpumBudget(mMaxChimpumBudget);
-		result.setMinChimpumBudget(mMinChimpumBudget);
-		result.setDeviationChimpumBudget(mDeviationChimpumBudget);
+		mAverageBridHelping.put("EUR", totalEur!=0?totalEur/nEur:0.);
+		mAverageBridHelping.put("USD", totalUsd!=0?totalUsd/nUsd:0.);
+		mAverageBridHelping.put("GBP", totalGbp!=0?totalGbp/nGbp:0.);
+		mMaxBridHelping.put("EUR", maxEur);
+		mMaxBridHelping.put("USD", maxUsd);
+		mMaxBridHelping.put("GBP", maxGbp);
+		mMinBridHelping.put("EUR", minEur==Double.MAX_VALUE?0.:minEur);
+		mMinBridHelping.put("USD", minUsd==Double.MAX_VALUE?0.:minUsd);
+		mMinBridHelping.put("GBP", minGbp==Double.MAX_VALUE?0.:minGbp);
+		mDeviationBridHelping.put("EUR", nEur!=0?Math.sqrt(desviationEur/nEur):0);
+		mDeviationBridHelping.put("USD", nUsd!=0?Math.sqrt(desviationUsd/nUsd):0);
+		mDeviationBridHelping.put("GBP", nGbp!=0?Math.sqrt(desviationGbp/nGbp):0);
+		result.setAverageBridHelping(mAverageBridHelping);
+		result.setMaxBridHelping(mMaxBridHelping);
+		result.setMinBridHelping(mMinBridHelping);
+		result.setDeviationBridHelping(mDeviationBridHelping);
 		
 		return result;
 	}

@@ -1,9 +1,9 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.brid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.entities.chimpum.Chimpum;
+import acme.entities.brid.Brid;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Errors;
 import acme.framework.controllers.Request;
@@ -11,23 +11,23 @@ import acme.framework.services.AbstractDeleteService;
 import acme.roles.Inventor;
 
 @Service
-public class ChimpumDeleteService implements AbstractDeleteService<Inventor, Chimpum> {
+public class BridDeleteService implements AbstractDeleteService<Inventor, Brid> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected ChimpumRepository repository;
+	protected BridRepository repository;
 
 
 	@Override
-	public boolean authorise(final Request<Chimpum> request) {
+	public boolean authorise(final Request<Brid> request) {
 		assert request != null;
 		
 		return true;
 	}
 
 	@Override
-	public void validate(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void validate(final Request<Brid> request, final Brid entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
@@ -36,39 +36,39 @@ public class ChimpumDeleteService implements AbstractDeleteService<Inventor, Chi
 	}
 
 	@Override
-	public void bind(final Request<Chimpum> request, final Chimpum entity, final Errors errors) {
+	public void bind(final Request<Brid> request, final Brid entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
 
-		request.bind(entity, errors, "code", "title", "description", "period", "budget", "link");
+		request.bind(entity, errors, "code", "theme", "summary", "period", "helping", "furtherInfo");
 		
 	}
 
 	@Override
-	public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+	public void unbind(final Request<Brid> request, final Brid entity, final Model model) {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "code", "title", "description", "period", "budget", "link");
+		request.unbind(entity, model, "code", "theme", "summary", "period", "helping", "furtherInfo");
 	}
 
 	@Override
-	public Chimpum findOne(final Request<Chimpum> request) {
+	public Brid findOne(final Request<Brid> request) {
 		assert request != null;
 		
-		Chimpum result;
+		Brid result;
 		int id;
 
 		id = request.getModel().getInteger("id");
-		result = this.repository.findOneChimpumById(id);
+		result = this.repository.findOneBridById(id);
 
 		return result;
 	}
 
 	@Override
-	public void delete(Request<Chimpum> request, Chimpum entity) {
+	public void delete(Request<Brid> request, Brid entity) {
 		assert request != null;
 		assert entity != null;
 		

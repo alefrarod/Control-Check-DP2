@@ -45,7 +45,7 @@ public class InventorToolKitUpdateService implements AbstractUpdateService<Inven
 		assert errors != null;
 		
 		ToolKit ch = this.repository.findAnyToolKitByCode(entity.getCode());
-		errors.state(request, ch==null, "code", "inventor.Chimpum.period.code-error");
+		errors.state(request, ch==null, "code", "inventor.brid.period.code-error");
 		
 	}
 

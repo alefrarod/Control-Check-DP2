@@ -16,8 +16,8 @@
 <%@taglib prefix="acme" uri="urn:jsptagdir:/WEB-INF/tags"%>
 
 <acme:list>
-	<acme:list-column code="inventor.chimpum.list.label.code" path="code" width="25%"/>
-	<acme:list-column code="inventor.chimpum.list.label.title" path="title" width="25%"/>
-	<acme:list-column code="inventor.chimpum.list.label.description" path="description" width="50%"/>
+	<acme:list-column code="inventor.brid.list.label.code" path="code" width="25%"/>
+	<acme:list-column code="inventor.brid.list.label.theme" path="theme" width="25%"/>
+	<acme:list-column code="inventor.brid.list.label.summary" path="summary" width="50%"/>
 </acme:list>
-<acme:button code="inventor.chimpum.list.button.create" action="/inventor/chimpum/create"/>
+<acme:button code="inventor.brid.list.button.create" action="/inventor/brid/create"/>

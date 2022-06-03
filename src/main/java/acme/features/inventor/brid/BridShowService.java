@@ -1,4 +1,4 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.brid;
 
 import java.util.List;
 
@@ -6,36 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.artifact.Artifact;
-import acme.entities.chimpum.Chimpum;
+import acme.entities.brid.Brid;
 import acme.framework.components.models.Model;
 import acme.framework.controllers.Request;
 import acme.framework.services.AbstractShowService;
 import acme.roles.Inventor;
 
 @Service
-public class ChimpumShowService implements AbstractShowService<Inventor, Chimpum>{
+public class BridShowService implements AbstractShowService<Inventor, Brid>{
 	
 	// Internal state ---------------------------------------------------------
 
 		@Autowired
-		protected ChimpumRepository repository;
+		protected BridRepository repository;
 
-		// AbstractShowService<Inventor, Chimpum> interface --------------------------
+		// AbstractShowService<Inventor, Brid> interface --------------------------
 
 		@Override
-		public boolean authorise(final Request<Chimpum> request) {
+		public boolean authorise(final Request<Brid> request) {
 			assert request != null;
 
 			return true;
 		}
 
 		@Override
-		public void unbind(final Request<Chimpum> request, final Chimpum entity, final Model model) {
+		public void unbind(final Request<Brid> request, final Brid entity, final Model model) {
 			assert request != null;
 			assert entity != null;
 			assert model != null;
 
-			request.unbind(entity, model, "code", "creationMoment", "title", "description", "period", "budget", "link");
+			request.unbind(entity, model, "code", "creationMoment", "theme", "summary", "period", "helping", "furtherInfo");
 			model.setAttribute("isNew", false);
 			List<Artifact> listArt = this.repository.findArtifactList();
 			Artifact a = new Artifact();
@@ -49,14 +49,14 @@ public class ChimpumShowService implements AbstractShowService<Inventor, Chimpum
 		}
 
 		@Override
-		public Chimpum findOne(final Request<Chimpum> request) {
+		public Brid findOne(final Request<Brid> request) {
 			assert request != null;
 
-			Chimpum result;
+			Brid result;
 			int id;
 
 			id = request.getModel().getInteger("id");
-			result = this.repository.findOneChimpumById(id);
+			result = this.repository.findOneBridById(id);
 
 			return result;
 		}

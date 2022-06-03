@@ -1,32 +1,32 @@
-package acme.features.inventor.chimpum;
+package acme.features.inventor.brid;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import acme.entities.chimpum.Chimpum;
+import acme.entities.brid.Brid;
 import acme.framework.controllers.AbstractController;
 import acme.roles.Inventor;
 
 @Controller
-public class ChimpumController extends AbstractController<Inventor, Chimpum>{
+public class BridController extends AbstractController<Inventor, Brid>{
 	// Internal state ---------------------------------------------------------
 
 		@Autowired
-		protected ChimpumListService	listService;
+		protected BridListService	listService;
 
 		@Autowired
-		protected ChimpumShowService	showService;
+		protected BridShowService	showService;
 		
 		@Autowired
-		protected ChimpumUpdateService	updateService;
+		protected BridUpdateService	updateService;
 		
 		@Autowired
-		protected ChimpumCreateService	createService;
+		protected BridCreateService	createService;
 		
 		@Autowired
-		protected ChimpumDeleteService	deleteService;
+		protected BridDeleteService	deleteService;
 
 		// Constructors -----------------------------------------------------------
 

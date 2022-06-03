@@ -33,5 +33,5 @@ administrator.dashboard.form.label.deviation-budget-of=  Desviación del presupu
 administrator.dashboard.form.label.max-prize-in= Presupuesto máximo en
 administrator.dashboard.form.label.min-prize-in= Presupuesto mínimo en
 
-administrator.dashboard.form.title.chimpum = Chimpums
-administrator.dashboard.form.label.ratio-of-artifacts = Porcentaje de artefactos con chimpums
+administrator.dashboard.form.title.brid = Brids
+administrator.dashboard.form.label.ratio-of-artifacts = Porcentaje de artefactos con brids
